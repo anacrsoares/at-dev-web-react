@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Button16, DateTimePicker, Grid, TextField } from "../../components";
+import { DateTimePicker, Grid, TextField } from "../../components";
+import { Button } from "@mui/material";
 import { handleInputChange, selectItem } from "../../utils/action";
 import { adjustDateTimeForTimezone } from "../../utils/core";
 
@@ -33,38 +34,42 @@ const Diaper = ({ data, setData, translate }) => {
         />
       </Grid>
       <Grid item={true} size={{ xs: 12 }}>
-        <Button16
+        <Button
+          variant={data.type === 1 ? "contained" : "outlined"}
           color={data.type === 1 ? "secondary" : "primary"}
           onClick={() => {
             selectItem(1, "type", data, setData);
           }}
         >
           {translate("diaper-wet")}
-        </Button16>
-        <Button16
+        </Button>
+        <Button
+          variant={data.type === 2 ? "contained" : "outlined"}
           color={data.type === 2 ? "secondary" : "primary"}
           onClick={() => {
             selectItem(2, "type", data, setData);
           }}
         >
           {translate("diaper-dirty")}
-        </Button16>
-        <Button16
+        </Button>
+        <Button
+          variant={data.type === 3 ? "contained" : "outlined"}
           color={data.type === 3 ? "secondary" : "primary"}
           onClick={() => {
             selectItem(3, "type", data, setData);
           }}
         >
           {translate("diaper-both")}
-        </Button16>
-        <Button16
+        </Button>
+        <Button
+          variant={data.type === 4 ? "contained" : "outlined"}
           color={data.type === 4 ? "secondary" : "primary"}
           onClick={() => {
             selectItem(4, "type", data, setData);
           }}
         >
           {translate("diaper-clean")}
-        </Button16>
+        </Button>
       </Grid>
       <Grid item={true} size={{ xs: 12 }}>
         <TextField

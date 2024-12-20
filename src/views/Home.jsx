@@ -9,26 +9,30 @@ import baby from "../assets/img/baby.png";
 import { useNavigate } from "react-router-dom";
 
 import { ACTIONS } from "../constants/actions";
+import { useEffect, useState } from "react";
+
+import { list } from "../services/database";
 
 const Home = () => {
   const navigate = useNavigate();
   const theme = useTheme();
 
-  const items = [
-    { action_type: 1 },
-    { action_type: 2 },
-    { action_type: 3 },
-    { action_type: 3 },
-    { action_type: 2 },
-    { action_type: 1 },
-    { action_type: 1 },
-    { action_type: 1 },
-    { action_type: 1 },
-    { action_type: 1 },
-    { action_type: 1 },
-    { action_type: 1 },
-    { action_type: 1 },
-  ];
+  // teste: mostrando as acoes na home vindas do Local Storage
+  const [data, setData] = useState([]);
+
+  const dataLocal = () => {
+    const d = JSON.parse(localStorage.getItem("items"));
+    // const d = list();
+    if (d) {
+      setData(d);
+    }
+  };
+
+  useEffect(() => {
+    dataLocal();
+  }, []);
+
+  // fim do teste: mostrando as acoes na home vindas do Local Storage
 
   return (
     <>
@@ -109,8 +113,7 @@ const Home = () => {
             </Box>
           </Grid>
 
-          {/* container de tarefas */}
-
+          {/* inicio container de tarefas */}
           <Grid container={true} size={{ xs: 12 }}>
             <Grid
               container={true}
@@ -122,32 +125,28 @@ const Home = () => {
             >
               {ACTIONS.map((action, idx) => {
                 return (
-                  <Grid index={idx} item={true} size={{ xs: 4 }} s>
+                  <Grid index={idx} item={true} size={{ xs: 4 }} key={idx}>
                     <CardNewItem {...action} />
                   </Grid>
                 );
               })}
             </Grid>
-            {/* fim container de tarefas */}
           </Grid>
-
-          {/* container de listagem de tarefas */}
-        </Grid>
-        <Grid
-          item={true}
-          size={{ xs: 12 }}
-          sx={{
-            overflow: "auto",
-            position: "relative",
-            top: "45px",
-            height: "255px",
-            width: "100%",
-            paddingBottom: "10px",
-            paddingLeft: "10px",
-            paddingRight: "10px",
-          }}
-        >
-          <CustomList items={items} />
+          {/* fim container de tarefas */}
+          {/* inicio container de listagem de tarefas */}
+          <Grid
+            sx={{
+              width: "100%",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+            }}
+          >
+            <CustomList
+              items={data}
+              sx={{ overflow: "auto", maxHeight: "50vh", marginTop: "4em" }}
+            />
+          </Grid>
+          {/* fim container de listagem de tarefas */}
         </Grid>
       </Grid>
     </>

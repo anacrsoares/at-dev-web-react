@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAppContext } from "../Context";
 import { Button16, Diaper, Eat, Sleep, Grid, AppBar } from "../components";
 import { useEffect, useState } from "react";
-import { drop, get, save, update } from "../services/supabasedb";
+import { save, update, drop, get, list } from "../services/database";
 import { getTitle, validateFields } from "../utils/action";
 import { getUser } from "../utils/core";
 
@@ -16,6 +16,9 @@ const Form = () => {
 
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
+
+  // teste
+  console.log(data);
 
   const getForm = (actionType) => {
     switch (actionType) {
@@ -35,11 +38,7 @@ const Form = () => {
 
   const loadData = async (id) => {
     if (id) {
-      const result = await get("action_students", [
-        { field: "id", value: id },
-        { field: "user_id", value: getUser().id },
-      ]);
-      setData(result);
+      setData(get(id));
     }
   };
 
@@ -48,6 +47,23 @@ const Form = () => {
       loadData(params.id);
     }
   }, []);
+
+  // teste de salvar no Local Storage (fake save iniciante)
+  // const save = async () => {
+  //   const d = JSON.parse(window.localStorage.getItem("items"));
+  //   // const d = list();
+
+  //   let dFinal = [];
+
+  //   if (d) {
+  //     dFinal = [...d, data];
+  //   } else {
+  //     dFinal = [data];
+  //   }
+
+  //   console.log(dFinal);
+  //   localStorage.setItem("items", JSON.stringify(dFinal));
+  // };
 
   return (
     <>
@@ -83,44 +99,12 @@ const Form = () => {
             type="submit"
             fullWidth
             variant="contained"
-            onClick={async () => {
-              try {
-                const fields = validateFields(data, actionType);
-                if (fields.length === 0) {
-                  if (id) {
-                    await update("action_students", data, id);
-                  } else {
-                    data.user_id = getUser().id;
-                    await save("action_students", data);
-                  }
-                  showAlertMessage(
-                    `Item ${id ? "editado" : "criado"} com sucesso!!!`,
-                    "success"
-                  );
-                  setTimeout(() => {
-                    navigate("/");
-                  }, 3000);
-                } else {
-                  showAlertMessage(
-                    `Os campos ${fields.join(", ")} são obrigatório`,
-                    "warning"
-                  );
-                }
-              } catch (err) {
-                showAlertMessage(
-                  `Erro ao ${id ? "editar" : "criar"} item: ` + err,
-                  "error"
-                );
-              }
+            onClick={() => {
+              save(data);
             }}
             sx={{
               mt: 3,
               mb: 2,
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              borderRadius: "0 !important",
-              margin: 0,
             }}
           >
             {translate("save")}

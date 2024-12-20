@@ -40,7 +40,7 @@ const CustomList = ({ items, ...props }) => {
     return "O bebê está trocando a fralda.";
   };
 
-  const generateSubtitle = (item) => {
+  const generateSubtitle = (item, translate) => {
     switch (item.action_type) {
       case 1:
         return subtitleSleep(item);
@@ -83,7 +83,7 @@ const CustomList = ({ items, ...props }) => {
             </ListItemAvatar>
             <ListItemText
               primary={translate(typeStr)}
-              secondary={generateSubtitle(item)}
+              secondary={generateSubtitle(item, translate)}
             />
           </ListItem>
         );
