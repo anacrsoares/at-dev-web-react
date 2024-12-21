@@ -1,13 +1,13 @@
 import { TextField } from "@mui/material";
 
 const TextFieldComponent = (props) => {
-  const { variant = "outlined", className = "", ...otherProps } = props;
+  const { variant = "outlined", ...otherProps } = props;
 
   return (
     <TextField
-      className={`general-textfield ${className}`}
       variant={variant}
       {...otherProps}
+      className={`general-textfield ${props.className} ? ${props.className} : ""`}
     />
   );
 };

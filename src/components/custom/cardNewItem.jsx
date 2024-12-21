@@ -2,9 +2,11 @@ import { Card, Typography, Fab } from "@mui/material";
 import { Box } from "../../components";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../../Context";
 
 export default function CardNewItem({ title, actionType, Icon, color }) {
   const navigate = useNavigate();
+  const { translate } = useAppContext();
 
   return (
     <Card
@@ -28,7 +30,7 @@ export default function CardNewItem({ title, actionType, Icon, color }) {
           wordWrap: "break-word",
         }}
       >
-        {title}
+        {translate(title)}
       </Typography>
       <Box sx={{ ...styles.containerBox }}>
         <Typography
@@ -54,7 +56,7 @@ export default function CardNewItem({ title, actionType, Icon, color }) {
             bottom: "-35px",
           }}
         >
-          {<AddIcon sx={{ color: color }} />}
+          <AddIcon sx={{ color: color }} />
         </Fab>
       </Box>
     </Card>

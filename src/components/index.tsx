@@ -21,3 +21,5 @@ export { default as Sleep } from "./custom/sleep";
 export { default as AppBar } from "./custom/appBar";
 export { default as TextField } from "./textfield";
 export { default as IconButton } from "./iconbutton";
+export { default as Typography } from "./typography";
+export { default as ButtonSettings } from "./buttonSettings";

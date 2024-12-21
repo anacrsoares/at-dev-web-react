@@ -3,15 +3,15 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import BabyChangingStationIcon from "@mui/icons-material/BabyChangingStation";
 
 const ACTIONS = [
-  { title: "Sono", actionType: 1, Icon: CribIcon, color: "#60c1fc" },
+  { title: "sleep", actionType: 1, Icon: CribIcon, color: "#60c1fc" },
   {
-    title: "Amamentação",
+    title: "eat",
     actionType: 2,
     Icon: RestaurantIcon,
     color: "#33ff7d",
   },
   {
-    title: "Fralda",
+    title: "diaper",
     actionType: 3,
     Icon: BabyChangingStationIcon,
     color: "#ffff33",
