@@ -6,7 +6,7 @@ export default defineConfig(() => {
   return {
     base: "/at-dev-web-react/",
     build: {
-      outDir: "build",
+      outDir: "dist",
     },
     plugins: [react(), liveReload(".src/**/*.(js, jsx, ts, tsx)")],
   };

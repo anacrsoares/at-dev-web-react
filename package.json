@@ -32,8 +32,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "test": "vite test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "vite build && gh-pages -d dist"
   },
   "eslintConfig": {
     "extends": [
