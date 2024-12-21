@@ -4,6 +4,7 @@ import liveReload from "vite-plugin-live-reload";
 
 export default defineConfig(() => {
   return {
+    base: "/at-dev-web-react/",
     build: {
       outDir: "build",
     },

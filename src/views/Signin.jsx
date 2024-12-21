@@ -87,6 +87,7 @@ const SignIn = () => {
         <Typography variant="h5">
           {translate("password")}
           <TextField
+            type="password"
             label="Digite sua senha"
             fullWidth={true}
             value={data.password.value}
